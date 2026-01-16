@@ -1,0 +1,7 @@
+INCIDENT_LOCATION,housing_type,ownership,room_style
+Building 1,Apartment,University-Owned,Apartments
+Building 2,Residence Hall,University-Owned,Suites
+Building 3,Residence Hall,University-Owned,Traditional
+Building 4,Apartment,Private,Apartments
+Building 5,Hotel,Private,Suites
+Building 6,Apartment,University-Affiliated,Apartments

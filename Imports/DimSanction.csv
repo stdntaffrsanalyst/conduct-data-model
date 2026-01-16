@@ -1,0 +1,10 @@
+SANCTION,DESCRIPTIVE_NAME,SANCTION_CATEGORY,CATEGORY_LABEL,RESTRICTIVE_FLAG,SEVERITY_LEVEL,SEVERITY_LABEL
+ASEP,Alcohol Skills Education Program (ASEP),Educational - Alcohol & Drug Education,AOD,FALSE,0,Educational
+THEFTAWARE,Theft Awareness Course,Educational - Online Learning Courses,Online Module,FALSE,0,Educational
+FIRESAFEED,Fire Safety Education,Educational - Reflective Writing Activities,Reflective Writing,FALSE,0,Educational
+REFLGTUL,Guide to University Living - Reflection Paper,Educational - Reflective Writing Activities,Reflective Writing,FALSE,0,Educational
+REPRIMAND,Reprimand,Status,Status,FALSE,1,Status (Non-Restrictive)
+DP,University Probation,Status,Status,TRUE,2,Conditional Restriction
+TERMINATION,Housing Removal,Inactive - Housing,Housing,TRUE,3,Restrictive
+LOSSPRIV,Loss of Privileges,Restriction,Restriction,TRUE,3,Restrictive
+EXPULSION,Dismissal,Status,Status,TRUE,4,Removal
