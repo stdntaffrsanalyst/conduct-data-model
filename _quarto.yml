@@ -1,0 +1,182 @@
+project:
+  type: default
+
+date-format: "MMMM D, YYYY"
+
+format:
+  pdf:
+    pdf-engine: lualatex
+    documentclass: scrartcl
+    linestretch: 1.06
+    classoption:
+      - titlepage
+      - parskip=half
+    mainfont: "Open Sans"
+
+    # Kill the default title page + UC brand helpers + global typography polish
+    include-in-header:
+      text: |
+        \makeatletter
+        \renewcommand{\maketitle}{} % suppress auto title page
+        \makeatother
+        
+        % Brand colors
+        \usepackage{xcolor}
+        \definecolor{PrimaryColor}{HTML}{0D0887}   % Deep blue-purple 
+        \definecolor{SecondaryColor}{HTML}{718096} % Warm gray
+        
+        % Accessible heading color progression
+        \definecolor{Heading1}{HTML}{0D0887}   % Deep blue-purple
+        \definecolor{Heading2}{HTML}{7E03A8}   % Royal purple
+        \definecolor{Heading3}{HTML}{CC4678}   % Magenta-red
+        \definecolor{Heading4}{HTML}{F89540}   % Orange
+
+        % PDF Metadata and Hyperlink Settings
+        \usepackage{hyperref}
+        \hypersetup{
+            pdfauthor={Joshua L. Moermond},
+            pdftitle={Building an Assessment-Ready Conduct Data Model},
+            pdfsubject={Student Conduct Data Analytics and Assessment},
+            pdfkeywords={student conduct, Maxient, data modeling, Power BI, assessment, star schema, higher education},
+            pdfcreator={Quarto with R 4.5.2 in R Studio},
+            pdflang={en-US},
+            pdfdisplaydoctitle=true
+        }
+
+        % Fonts — explicit Windows Open Sans mapping
+        \usepackage{fontspec}
+        \newfontfamily\OpenSans[
+          UprightFont = OpenSans-Regular.ttf,
+          BoldFont    = OpenSans-Bold.ttf,
+          ItalicFont  = OpenSans-Italic.ttf,
+          BoldItalicFont = OpenSans-BoldItalic.ttf
+        ]{Open Sans}
+        
+        \newfontfamily\OpenSansLight[
+          UprightFont = OpenSans-Light.ttf,
+          ItalicFont  = OpenSans-LightItalic.ttf
+        ]{Open Sans}
+        
+        \newcommand{\OpenSansBold}{\OpenSans\bfseries}
+        
+        % Monospace font for code
+        \setmonofont{Courier New}[Scale=0.75]
+        
+        % Micro-typography (improves justification/spacing)
+        \usepackage{microtype}
+        
+        % Prevent widows/orphans (single lines at top/bottom of pages)
+        \widowpenalty=10000
+        \clubpenalty=10000
+        
+        % Clean footer page numbers (starts after title page)
+        \usepackage[automark]{scrlayer-scrpage}
+        \clearpairofpagestyles
+        \cfoot{\pagemark}
+        
+        % Better default tables
+        \usepackage{booktabs}
+        \renewcommand{\arraystretch}{1.1}
+        
+        % Slightly roomier TOC spacing
+        \usepackage{tocloft}
+        \setlength{\cftbeforesecskip}{2pt}
+        
+        % Graphics for logo
+        \usepackage{graphicx}
+        
+        % Better spacing in callout boxes and paragraphs
+        \setlength{\parskip}{0.5\baselineskip}
+        
+        % Emoji support
+        \usepackage{emoji}
+        \setemojifont{Segoe UI Emoji}[Renderer=HarfBuzz]
+        
+        % Emoji fallback using fontspec — WITH bold/italic mappings
+        \directlua{
+          luaotfload.add_fallback("emojifallback", {"Segoe UI Emoji:mode=harf"})
+        }
+        \setmainfont{Open Sans}[
+          BoldFont = OpenSans-Bold.ttf,
+          ItalicFont = OpenSans-Italic.ttf,
+          BoldItalicFont = OpenSans-BoldItalic.ttf,
+          RawFeature={fallback=emojifallback}
+        ]
+        
+        % Heading colors with titlesec
+        \usepackage{titlesec}
+        
+        % Level 1 headings - Steel blue
+        \titleformat{\section}
+          {\normalfont\Large\bfseries\color{Heading1}}
+          {\thesection}{1em}{}
+        
+        % Level 2 headings - Very dark gray
+        \titleformat{\subsection}
+          {\normalfont\large\bfseries\color{Heading2}}
+          {\thesubsection}{1em}{}
+        
+        % Level 3 headings - Slate gray
+        \titleformat{\subsubsection}
+          {\normalfont\normalsize\bfseries\color{Heading3}}
+          {\thesubsubsection}{1em}{}
+        
+        % Level 4 headings - Warm gray
+        \titleformat{\paragraph}
+          {\normalfont\normalsize\bfseries\color{Heading4}}
+          {\theparagraph}{1em}{}
+        
+        % Landscape pages for appendices
+        \usepackage{pdflscape}
+
+    # UC-branded title page
+    include-before-body:
+      text: |
+        \makeatletter
+        \begin{titlepage}
+        \centering
+        
+        % Title — Open Sans Bold + Primary Color
+        {\Huge\OpenSansBold\textcolor{PrimaryColor}{\@title}\par}
+
+        \vspace{0.6em}
+
+        % Subtitle — Open Sans Light + Secondary Color
+        {\Large\OpenSansLight\textcolor{SecondaryColor}{\@subtitle}\par}
+
+        \vspace{0.9em}
+
+        % Description line
+        {\normalsize\scshape Methodology and Data Model Documentation\par}
+
+        \vfill
+
+        % Author block
+        {\Large Joshua L. Moermond\par}
+        \vspace{0.35em}
+        {\normalsize Assistant Director for Residential Conduct and Assessment\par}
+        {\normalsize Student Conduct and Community Standards\par}
+        {\normalsize University of Cincinnati\par}
+
+        \vspace{1.25em}
+
+        % Date
+        {\normalsize Last updated: \@date\par}
+
+        \end{titlepage}
+        \clearpage
+        \makeatother
+
+    toc: true
+    toc-depth: 3
+    toc-title: "Contents"
+    number-sections: true
+    number-depth: 4
+    link-citations: true
+    colorlinks: true
+    code-block-bg: '#F7F7F7'
+    code-block-font-size: small
+
+citeproc: true
+nocite: "@*"
+bibliography: Imports/star_schema.bib
