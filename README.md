@@ -155,7 +155,7 @@ writeBin(pepper, "Imports/pepper.bin")
 
 ## Adapting for Your Institution
 
-This code was built for the University of Cincinnati's Maxient configuration. To adapt it:
+This code was built specifically for the author's institutional Maxient configuration. To adapt it:
 
 1. **Review `config.R`** — Update file paths, location mappings, and violation name standardizations to match your data
 2. **Review field names** — Your Maxient exports may use different column names for custom fields
@@ -186,4 +186,5 @@ Joshua L. Moermond
 ## Acknowledgments
 
 Portions of this documentation were developed with the assistance of generative AI tools for writing clarity and code refinement. All analytic decisions, methodology, and interpretations were designed and validated by the author.
+
 
