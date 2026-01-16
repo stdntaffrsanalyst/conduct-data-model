@@ -36,13 +36,15 @@ This repository contains **code, documentation, and template files**—not actua
 │   ├── config.R                 # Configuration: paths, mappings, constants
 │   ├── conduct_funcs.R          # Custom R functions for transformation
 │   ├── star_schema.bib          # Bibliography
-│   ├── DimSanction.csv          # Sanction categories and severity levels (template with example data)
+│   ├── DimCharge.csv            # Charge metadata (template with example data)
+│   ├── DimSanction.csv          # Sanction metadata (template with example data)
 │   ├── DimHousing.csv           # Housing attributes (template with example data)
 │   ├── DimHousingYear.csv       # Year-specific housing attributes (template with example data)
 │   └── housing_census.csv       # Building census data (template with example data)
 ├── images/
 │   ├── erd-star-schema.png      # Entity-relationship diagram
 │   └── powerbi_screenshots/     # Screenshots showing PowerBI dashboards creating using the star schema output
+│       ├── aod_spotlight.png    # Note: select visuals removed intentionally
 │       ├── demographics.png     # Note: select visuals removed intentionally
 │       ├── incidents.png        # Note: select visuals removed intentionally
 │       ├── overview.png         # Note: select visuals removed intentionally
@@ -192,6 +194,7 @@ Social: [LinkedIn](https://www.linkedin.com/in/jmoermond)
 ## Acknowledgments
 
 Portions of this documentation were developed with the assistance of generative AI tools for writing clarity and code refinement. All analytic decisions, methodology, and interpretations were designed and validated by the author.
+
 
 
 
