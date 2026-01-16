@@ -27,7 +27,7 @@ This project provides a data pipeline that transforms raw Maxient exports into c
 
 ## Repository Contents
 
-This repository contains **code and documentation**, not data. 
+This repository contains **code, documentation, and template files**—not actual student data. 
 
 ```
 ├── Building-an-Assessment-Ready-Conduct-Data-Model.qmd   # Main documentation (Quarto)
@@ -36,13 +36,16 @@ This repository contains **code and documentation**, not data.
 │   ├── config.R                 # Configuration: paths, mappings, constants
 │   ├── conduct_funcs.R          # Custom R functions for transformation
 │   ├── star_schema.bib          # Bibliography
-│   ├── DimSanction.csv          # Sanction categories and severity levels
-│   ├── DimHousing.csv           # Housing attributes (template)
-│   └── DimHousingYear.csv       # Year-specific housing attributes (template)
+│   ├── DimSanction.csv          # Sanction categories and severity levels (template)
+│   ├── DimHousing.csv           # Housing attributes (template with example data)
+│   ├── DimHousingYear.csv       # Year-specific housing attributes (template)
+│   └── housing_census.csv       # Building census data (template with example data)
 ├── images/
 │   └── erd-star-schema.png      # Entity-relationship diagram
 └── _quarto.yml                  # Quarto configuration
 ```
+
+The template CSV files contain example data with placeholder building names. Replace these with your institution's actual data.
 
 ## What the Pipeline Creates
 
@@ -84,7 +87,6 @@ When you run this code with your own Maxient exports, it produces an Excel workb
 | Output Excel files | Contain transformed but potentially identifiable patterns |
 | `pepper.bin` | Encryption key for anonymization—must be generated locally |
 | `hearing_officers.csv` | Contains staff names |
-| `housing_census.csv` | Institution-specific occupancy data |
 | `academic_plans.csv` | Institution-specific major/college mappings |
 
 To use this at your institution, you'll need to provide your own versions of these files.
@@ -114,16 +116,54 @@ Student IDs, case numbers, and file IDs are hashed using HMAC-SHA256, making the
 - **Quarto** (for rendering documentation)
 - **Power BI Desktop** (for dashboards)
 
+## Maxient Standard Fields
+
+Maxient uses a combination of standard fields (consistent across all institutions) and custom fields (configured per institution). This pipeline uses the following **standard fields** available in Custom Analytics:
+
+| Field | Field | Field | Field |
+|-------|-------|-------|-------|
+| FILE_ID | APPT_DATE | CASE_NUMBER | DEADLINE_REASON |
+| DEADLINE | SID | ASSIGNED_TO | STATUS |
+| TYPE | CASE_CREATED_DATE | HOLD_IN_PLACE | GENDER |
+| ACADEMIC_MAJOR | GPA_CUME | CLASSIFICATION | DOB |
+| MEM_ATHLETICS_SPORT | ETHNICITY | REPORTED_DATE | CLERY_REPORTABILITY |
+| INCIDENT_LOCATION | ROLE | INCIDENT_DATE | HEARING_DATE |
+| HEARING_TYPE | CHARGE_1 | FINDING_1 | CHARGE_2 |
+| FINDING_2 | CHARGE_3 | FINDING_3 | CHARGE_4 |
+| FINDING_4 | CHARGE_5 | FINDING_5 | CHARGE_6 |
+| FINDING_6 | | | |
+
+If your institution uses these standard fields, much of the pipeline will work with minimal modification. The `config.R` file handles institution-specific variations like location name spellings and violation name standardizations.
+
+**Custom fields** (labeled OTHER1, OTHER2, Sanctions, etc. in Maxient) will vary by institution and require adjustment in the pipeline code.
+
+## Generating an Encryption Key
+
+The pipeline uses a 32-byte encryption key (`pepper.bin`) to anonymize student identifiers. To generate your own:
+
+```r
+# Run once to create your key
+pepper <- openssl::rand_bytes(32)
+writeBin(pepper, "Imports/pepper.bin")
+```
+
+**Important:**
+- Generate this only once and reuse it for all pipeline runs
+- The same key produces the same hashed IDs, allowing records to link across refreshes
+- Keep this file secure—do not commit it to version control
+- Back it up—if lost, you cannot regenerate consistent hashes
+
 ## Adapting for Your Institution
 
 This code was built for the University of Cincinnati's Maxient configuration. To adapt it:
 
 1. **Review `config.R`** — Update file paths, location mappings, and violation name standardizations to match your data
-2. **Review field names** — Your Maxient exports may use different column names
-3. **Create lookup tables** — Build your own DimHousing.csv, hearing_officers.csv, etc.
-4. **Generate an encryption key** — Create your own `pepper.bin` file (see documentation)
+2. **Review field names** — Your Maxient exports may use different column names for custom fields
+3. **Update the template files** — Replace the placeholder data in DimHousing.csv, DimHousingYear.csv, DimSanction.csv, and housing_census.csv with your institution's actual values
+4. **Create additional lookup tables** — Build your own hearing_officers.csv (see note below), academic_plans.csv, etc.
+5. **Generate an encryption key** — See "Generating an Encryption Key" above
 
-The methodology and table structures should transfer; the specific field mappings will need customization.
+The methodology and table structures should transfer; the specific field mappings will need customization. To create hearing_officers.csv, run Maxient System Report 914 (Hearing Officer Titles in Use). Take the first and second columns and then add columns for Office and Position. This will enable you to look at outcomes by office and position.  For example, you might ask, *"How long is it taking residence life staff to resolve cases?*
 
 ## Citation
 
