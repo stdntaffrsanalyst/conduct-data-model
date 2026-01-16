@@ -180,11 +180,12 @@ You are free to share and adapt this work for non-commercial purposes with attri
 ## Contact
 
 Joshua L. Moermond  
-[moermondsahe@gmail.com](mailto:moermondsahe@gmail.com)
-[LinkedIn](https://www.linkedin.com/in/jmoermond)
+Email: [moermondsahe@gmail.com](mailto:moermondsahe@gmail.com)
+Social: [LinkedIn](https://www.linkedin.com/in/jmoermond)
 
 ## Acknowledgments
 
 Portions of this documentation were developed with the assistance of generative AI tools for writing clarity and code refinement. All analytic decisions, methodology, and interpretations were designed and validated by the author.
+
 
 
