@@ -13,7 +13,7 @@ format:
       - parskip=half
     mainfont: "Open Sans"
 
-    # Kill the default title page + UC brand helpers + global typography polish
+    # Kill the default title page + brand helpers + global typography polish
     include-in-header:
       text: |
         \makeatletter
@@ -180,3 +180,4 @@ format:
 citeproc: true
 nocite: "@*"
 bibliography: Imports/star_schema.bib
+
