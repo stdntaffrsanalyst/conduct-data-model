@@ -41,7 +41,13 @@ This repository contains **code, documentation, and template files**—not actua
 │   ├── DimHousingYear.csv       # Year-specific housing attributes (template with example data)
 │   └── housing_census.csv       # Building census data (template with example data)
 ├── images/
-│   └── erd-star-schema.png      # Entity-relationship diagram
+│   ├── erd-star-schema.png      # Entity-relationship diagram
+│   └── powerbi_screenshots/     # Screenshots showing PowerBI dashboards creating using the star schema output
+│       ├── demographics.png     # Note: select visuals removed intentionally
+│       ├── incidents.png        # Note: select visuals removed intentionally
+│       ├── overview.png         # Note: select visuals removed intentionally
+│       ├── sanctions.png
+│       └── violations.png
 └── _quarto.yml                  # Quarto configuration
 ```
 
@@ -186,6 +192,7 @@ Social: [LinkedIn](https://www.linkedin.com/in/jmoermond)
 ## Acknowledgments
 
 Portions of this documentation were developed with the assistance of generative AI tools for writing clarity and code refinement. All analytic decisions, methodology, and interpretations were designed and validated by the author.
+
 
 
 
