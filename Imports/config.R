@@ -39,7 +39,8 @@ PATHS <- list(
     dim_housing = "Imports/DimHousing.csv",
     dim_housing_year = "Imports/DimHousingYear.csv",
     dim_sanction = "Imports/DimSanction.csv",
-    housing_census = "Imports/housing_census.csv"
+    housing_census = "Imports/housing_census.csv",
+    dim_charge = "Imports/DimCharge.csv"
   )
 )
 
@@ -49,7 +50,8 @@ PATHS <- list(
 RED_LOCATIONS <- c(
   "101 East Corry",
   "Bellevue Gardens", 
-  "Calhoun Hall", 
+  "Calhoun Hall",
+  "Comfort Inn",
   "CP Cincy", 
   "CRC Hall", 
   "Dabney Hall", 
@@ -65,8 +67,8 @@ RED_LOCATIONS <- c(
   "Senator Place",
   "Siddall Hall",
   "Stetson Square",
-  "Stratford Heights", 
-  "The Comfort Inn", 
+  "Stratford Heights",
+  "The Deacon",
   "The Eden", 
   "The Graduate",
   "The Union",
@@ -106,9 +108,10 @@ LOCATION_MAP <- c(
   "University Park Apts South" = "University Park Apartments",
   "University Park Apts. (Calhoun)" = "University Park Apartments",
   "Usquare" = "USquare",
-  "Verge" = "The Verge"
+  "Verge" = "The Verge",
+  "The Comfort Inn" = "Comfort Inn",
+  "MainStay Suites" = "Comfort Inn"
 )
-
 
 # Violation Name Standardization -----------------------------------------
 
@@ -155,6 +158,8 @@ VIOLATION_REPLACEMENTS <- c(
     "GUL - Health and Safety",
   "Residence Hall Rules &amp; Regulations - Keys &amp; Access" = 
     "GUL - Keys and Access",
+  "Residence Hall Rules &amp; Regulations - Mail" =
+    "GUL - Mail",
   "Residence Hall Rules &amp; Regulations - Pets, Service Animals, &amp; Assistance Animals" = 
     "GUL - Pets, Service Animals, and Assistance Animals",
   "Residence Hall Rules &amp; Regulations - Quiet Hours &amp; Noise" = 
@@ -182,6 +187,8 @@ VIOLATION_REPLACEMENTS <- c(
     "COVID-19 Safety",
   "University policies or rules – COVID-19 Safety Measures and Protocols" = 
     "COVID-19 Safety",
+  "University policies or rules \x96 COVID-19 Safety Measures and Protocols" = 
+    "COVID-19 Safety",
   "Harassment or Discrimination/Dating Violence" = 
     "Harassment or Discrimination",
   "Harassment or Discrimination/Sexual/gender-based Harassment" = 
@@ -191,9 +198,10 @@ VIOLATION_REPLACEMENTS <- c(
   "Harassment or Discrimination/Stalking" = 
     "Harassment or Discrimination",
   "Violation of federal, state, or local law" = 
-    "Violation of Federal, State, or Local Law"
+    "Violation of Federal, State, or Local Law",
+  "Tobacco and Smoke Free Environment Policy" = 
+    "Tobacco and Smoking"
 )
-
 
 # Sanction Name Standardization ------------------------------------------
 

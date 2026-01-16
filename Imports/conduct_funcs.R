@@ -686,3 +686,11 @@ recidivism_by_college_pbi <- function(df, academic_years) {
   calculate_recidivism(df, academic_years, group_by = "College", 
                        format = "pbi")
 }
+
+fix_nbsp <- function(x) {
+  x <- as.character(x)
+  x <- gsub("\u00A0", " ", x, fixed = TRUE)  # NBSP -> normal space
+  x <- gsub("[[:space:]]+", " ", x)          # collapse repeated whitespace
+  trimws(x)
+}
+
