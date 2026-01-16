@@ -58,7 +58,7 @@ The author is committed to making this document fully accessible. If you encount
 - Joshua L. Moermond
 - Email: [moermondsahe@gmail.com](mailto:moermondsahe@gmail.com)
 
-An HTML version of this document can be made available upon request and may provide better compatibility with some assistive technologies.
+An HTML version of this document is available in the project repository on [Github](https://github.com/stdntaffrsanalyst/conduct-data-model) may provide better compatibility with some assistive technologies.
 
 \newpage
 
@@ -232,6 +232,7 @@ A dimension table stores **descriptive information** that helps you filter and i
 | DimSanction | Sanction categories and severity | Group sanctions by type (educational, restrictive, etc.) |
 | DimCollege | Academic colleges | Filter or group by college |
 | DimHearingOfficer | Staff assignments | Analyze workload by officer or department |
+| DimViolation | Charges metadata (categories, severity, etc.) | Group charges by type and severity |
 
 ::: {.callout-tip}
 ## *Why Separate Facts from Context?*
@@ -504,7 +505,8 @@ Several external lookup tables enrich the Maxient data:
 | `DimHousingYear.csv` | Year-specific housing attributes | University Housing |
 | `DimSanction.csv` | Sanction categories and severity classifications | SCCS |
 | `housing_census.csv` | Resident counts by building and term | University Housing |
-
+| `DimCharge.csv` | Charge categories, severity, and flags | SCCS |
+\
 These lookup tables allow the dashboard to answer questions that Maxient data alone cannot—like "What's the violation rate per 100 residents?" or "How do patterns differ by academic college?"\
 
 ::: {.callout-tip}
@@ -1068,6 +1070,7 @@ df <- df |>
 # Standardize location names
 # ───────────────────────────────────────────────────────────────────────────
 mutate(
+    INCIDENT_LOCATION = fix_nbsp(INCIDENT_LOCATION),
     INCIDENT_LOCATION = str_to_title(INCIDENT_LOCATION),
     INCIDENT_LOCATION = recode(INCIDENT_LOCATION, !!!LOCATION_MAP,
                                .default = INCIDENT_LOCATION)
@@ -1712,6 +1715,7 @@ DimHousing <- read_csv(
   PATHS$imports$dim_housing,
   locale = locale(encoding = "Windows-1252")
 ) |>
+  mutate(INCIDENT_LOCATION = fix_nbsp(INCIDENT_LOCATION)) |>
   arrange(INCIDENT_LOCATION)
 
 df_schema(DimHousing) |>
@@ -1730,6 +1734,7 @@ DimHousingYear <- read_csv(
   PATHS$imports$dim_housing_year,
   locale = locale(encoding = "Windows-1252")
 ) |>
+  mutate(INCIDENT_LOCATION = fix_nbsp(INCIDENT_LOCATION)) |>
   arrange(INCIDENT_LOCATION)
 
 df_schema(DimHousingYear) |>
@@ -1806,6 +1811,8 @@ df_schema(DimStudent) |>
   print(n = Inf)
 ```
 
+
+
 ::: {.callout-tip}
 ## *Privacy and Purpose*
 
@@ -1813,6 +1820,42 @@ df_schema(DimStudent) |>
 
 **For Analysts:** The `slice_tail(n = 1)` after sorting by date ensures we keep the most recent record per student. If you need demographics *at time of incident* for longitudinal demographic analysis, you'd need to preserve that in the fact tables—a potential future enhancement.
 :::
+
+#### DimViolation
+
+**What It Contains:**: Charge metadata including categories, severity levels, and flags for analysis.
+
+| Field | Description |
+|-------|-------------|
+| VIOLATION | The violation/charge name |
+| POLICY | Policy area (Academic Integrity, Alcohol, Drugs, Harassment, Residential, General Conduct, etc.) |
+| CATEGORY | Behavior category (Substance Use, Interpersonal Harm, Property, Safety, Administrative, etc.) |
+| IS_ALCOHOL | Whether the violation involves alcohol |
+| IS_DRUG | Whether the violation involves drugs/narcotics |
+| IS_VIOLENCE | Whether the violation involves violence or threat of harm |
+| SEVERITY_LEVEL | Numeric severity (1–5) |
+| SEVERITY_LABEL | Text label for severity level |
+| RATIONALE | Brief explanation of severity classification |
+
+**Severity Scale:**
+
+| Level | Label | Examples |
+|-------|-------|----------|
+| 1 | Minor | Quiet hours, guest policy, tobacco, passive participation |
+| 2 | Moderate | Underage alcohol, paraphernalia, failure to comply, dishonesty |
+| 3 | Serious | Cheating, drug possession, theft, fire safety, destruction of property |
+| 4 | Severe | Hazing, harassment, weapons, public endangerment, retaliation |
+| 5 | Critical | Distribution, sexual misconduct, stalking, physical violence, domestic violence |
+\
+
+```{r}
+DimViolation <- read_csv(
+  PATHS$imports$dim_charge)
+
+df_schema(DimViolation) |>
+  select(column, type, example) |>
+  print(n = Inf)
+```
 
 ### Fact Tables
 
@@ -1988,7 +2031,9 @@ FactViolation <- charges |>
 # ─────────────────────────────────────────────────────────────────────────────
 FactViolation <- FactViolation |>
   mutate(VIOLATION = recode(VIOLATION, !!!VIOLATION_REPLACEMENTS, 
-                            .default = VIOLATION))
+                            .default = VIOLATION)) |>
+  mutate(OUTCOME = recode(OUTCOME, 
+                          "Amnesty - No Hearing" = "Amnesty"))
 
 df_schema(FactViolation) |>
   select(column, type, example) |>
@@ -2304,6 +2349,7 @@ census_long <- read_csv(PATHS$imports$housing_census) |>
     values_to = "CENSUS"
   ) |>
   rename(INCIDENT_LOCATION = BUILDING) |>
+  mutate(INCIDENT_LOCATION = fix_nbsp(INCIDENT_LOCATION)) |>
   mutate(
     # Map semester codes to academic years
     Academic_Year = case_when(
@@ -2391,6 +2437,7 @@ write_xlsx(
     DimAcademicYear   = DimAcademicYear,
     DimHearingOfficer = DimHearingOfficer,
     DimAcademicTerm   = DimAcademicTerm,
+    DimViolation      = DimViolation,
     
     # ─────────────────────────────────────────────────────────────────────────
     # Fact Tables
