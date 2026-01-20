@@ -1500,6 +1500,8 @@ DimCase <- df |>
 
 df_schema(DimCase) |>
   select(column, type, example) |>
+  mutate(across(3, ~ replace(.x, 6, "Hidden"))) |>
+  mutate(across(3, ~ replace(.x, 7, "Hidden"))) |>
   print(n = Inf)
 ```
 
@@ -1703,6 +1705,8 @@ DimHearingOfficer <- ho |>
 
 df_schema(DimHearingOfficer) |>
   select(column, type, example) |>
+  mutate(across(3, ~ replace(.x, 1, "Hidden"))) |>
+  mutate(across(3, ~ replace(.x, 2, "Hidden"))) |>
   print(n = Inf)
 ```
 
@@ -1720,6 +1724,7 @@ DimHousing <- read_csv(
 
 df_schema(DimHousing) |>
   select(column, type, example) |>
+  mutate(across(3, ~ replace(.x, 1, "Hidden"))) |>
   print(n = Inf)
 ```
 
@@ -1739,6 +1744,7 @@ DimHousingYear <- read_csv(
 
 df_schema(DimHousingYear) |>
   select(column, type, example) |>
+  mutate(across(3, ~ replace(.x, 1, "Hidden"))) |>
   print(n = Inf)
 ```
 
@@ -1808,6 +1814,9 @@ DimStudent <- df |>
 
 df_schema(DimStudent) |>
   select(column, type, example) |>
+  mutate(across(3, ~ replace(.x, 2, NA))) |>
+  mutate(across(3, ~ replace(.x, 10, "Hidden"))) |>
+  mutate(across(3, ~ replace(.x, 11, "Hidden"))) |>
   print(n = Inf)
 ```
 
@@ -1848,7 +1857,7 @@ df_schema(DimStudent) |>
 | 5 | Critical | Distribution, sexual misconduct, stalking, physical violence, domestic violence |
 \
 
-```{r}
+```{r message=FALSE}
 DimViolation <- read_csv(
   PATHS$imports$dim_charge)
 
@@ -1887,6 +1896,7 @@ FactDeadline <- df |>
 
 df_schema(FactDeadline) |>
   select(column, type, example) |>
+  mutate(across(3, ~ replace(.x, 7, "Hidden"))) |>
   print(n = Inf)
 ```
 
@@ -1923,6 +1933,8 @@ FactIncident <- df |>
 
 df_schema(FactIncident) |>
   select(column, type, example) |>
+  mutate(across(3, ~ replace(.x, 7, "Hidden"))) |>
+  mutate(across(3, ~ replace(.x, 9, "Hidden"))) |>
   print(n = Inf)
 ```
 
@@ -2037,6 +2049,7 @@ FactViolation <- FactViolation |>
 
 df_schema(FactViolation) |>
   select(column, type, example) |>
+  mutate(across(3, ~ replace(.x, 4, "Hidden"))) |>
   print(n = Inf)
 ```
 
@@ -2072,7 +2085,9 @@ FactSanction <- df |>
   ) |>
   select(FILE_ID, TYPE, INCIDENT_DATE, College, Sanction)
 
-df_schema(FactSanction)
+df_schema(FactSanction) |>
+  select(column, type, example) |>
+  print(n = Inf)
 ```
 
 ::: {.callout-tip}
@@ -2406,6 +2421,7 @@ FactHousingCensus <- census_long |>
 
 df_schema(FactHousingCensus) |>
   select(column, type, example) |>
+  mutate(across(3, ~ replace(.x, 2, "Hidden"))) |>
   print(n = Inf)
 ```
 
@@ -2580,7 +2596,7 @@ This file contains reusable functions for data transformation, anonymization, an
 
 cat("\\footnotesize\n")
 cat("```r\n")
-cat(readLines("Imports/config.R"), sep = "\n")
+cat(readLines("Imports/conduct_funcs.R"), sep = "\n")
 cat("\n```\n")
 cat("\\normalsize\n")
 ```
