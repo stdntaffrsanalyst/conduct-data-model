@@ -1,7 +1,3 @@
-Below is your README updated for the **dual-license model** (MIT for code + CC BY-NC 4.0 for documentation/content). I kept everything else intact and only made light edits where needed for clarity + hygiene.
-
----
-
 # Building an Assessment-Ready Conduct Data Model
 
 Transforms Maxient student conduct exports into a star schema data model for reliable Power BI dashboards.
@@ -213,3 +209,4 @@ Social: [LinkedIn](https://www.linkedin.com/in/jmoermond)
 ## Acknowledgments
 
 Portions of this documentation were developed with the assistance of generative AI tools for writing clarity and code refinement. All analytic decisions, methodology, and interpretations were designed and validated by the author.
+
