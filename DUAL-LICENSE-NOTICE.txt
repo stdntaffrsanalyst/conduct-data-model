@@ -11,5 +11,5 @@ This repository is dual-licensed:
    Creative Commons Attribution–NonCommercial 4.0 International (CC BY-NC 4.0).
    See: LICENSE-DOCS
 
-If you are unsure whether something is considered "code" or "documentation",
+If you are unsure whether something is considered "code" or "documentation", 
 treat it as documentation.
