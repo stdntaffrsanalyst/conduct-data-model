@@ -1,0 +1,9 @@
+cff-version: 1.2.0
+message: "If you use this work, please cite it as below."
+title: "Building an Assessment-Ready Conduct Data Model: Transforming Maxient Exports into Reliable Dashboards for Student Conduct Analysis"
+authors:
+  - family-names: "Moermond"
+    given-names: "Joshua L."
+year: 2026
+license: "CC-BY-NC-4.0"
+repository-code: "https://github.com/stdntaffrsanalyst/conduct-data-model"
