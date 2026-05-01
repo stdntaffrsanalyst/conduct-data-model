@@ -30,6 +30,7 @@ This project provides a data pipeline that transforms raw Maxient exports into c
 ## Repository Contents
 
 This repository contains **code, documentation, and template files**—not actual student data.
+```
 ├── HTML/
 │   ├── Building an Assessment-Ready Conduct Data Model.html   # Rendered HTML documentation
 │   └── Building an Assessment-Ready Conduct Data Model_files/ # HTML dependencies (CSS, JS, fonts)
@@ -60,7 +61,7 @@ This repository contains **code, documentation, and template files**—not actua
 ├── README.md                       # This file
 ├── security.md                     # Security and privacy reporting policy
 └── _quarto.yml                     # Quarto configuration
-
+```
 The template CSV files contain example data with placeholder building names. Replace these with your institution's actual data.
 
 ## What the Pipeline Creates
