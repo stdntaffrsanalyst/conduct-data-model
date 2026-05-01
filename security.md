@@ -8,7 +8,9 @@ If you believe you have found:
 
 **Do not open a public GitHub issue.**
 
-Instead, contact the maintainer privately (use GitHub’s private vulnerability reporting if enabled, or email if provided in the repo profile).
+Instead, contact the maintainer privately:
+- **Email:** moermondsahe@gmail.com
+- **GitHub:** Use private vulnerability reporting if enabled on this repository
 
 Include:
 - a clear description of the issue
@@ -30,7 +32,3 @@ Do NOT post or commit:
 If you accidentally posted sensitive content:
 1. Delete it immediately (comment, issue, discussion, commit, etc.).
 2. Notify the maintainer via the private channel above.
-
-## Supported versions
-
-This project is maintained on a best-effort basis. Security fixes will be prioritized for current mainline usage patterns.
