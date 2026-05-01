@@ -43,8 +43,8 @@ https://creativecommons.org/licenses/by-nc/4.0/
 Suggested Attribution:
 
   Moermond, J. L. (2026). Building an Assessment-Ready Conduct Data Model:
-  Transforming Maxient Exports into Reliable Dashboards for Student Conduct
-  Analysis. https://github.com/stdntaffrsanalyst/conduct-data-model
+  Answering Strategic Questions About Student Conduct Through Structured 
+  Data. https://github.com/stdntaffrsanalyst/conduct-data-model
 
 ───────────────────────────────────────────────────────────────────────────────
 
