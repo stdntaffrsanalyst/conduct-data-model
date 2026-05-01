@@ -44,7 +44,6 @@ This repository contains **code, documentation, and template files**—not actua
 │   ├── example_DimHousingYear.csv  # Year-specific housing attributes (template)
 │   └── example_housing_census.csv  # Building census data (template with example data)
 ├── images/
-│   ├── erd-star-schema.png         # Entity-relationship diagram
 │   └── powerbi_screenshots/        # Screenshots of Power BI dashboards built from the star schema output
 │       ├── aod_spotlight.png
 │       ├── demographics.png
