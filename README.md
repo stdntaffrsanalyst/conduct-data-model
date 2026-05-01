@@ -199,7 +199,7 @@ When opening a pull request, GitHub will automatically load a template prompting
 
 If you use or adapt this work, please cite:
 
-> Moermond, J. L. (2026). *Building an Assessment-Ready Conduct Data Model: Transforming Maxient Exports into Reliable Dashboards for Student Conduct Analysis.*
+> Moermond, J. L. (2026). *Building an Assessment-Ready Conduct Data Model: Answering Strategic Questions About Student Conduct Through Structured Data.*
 
 A machine-readable citation is available in [CITATION.cff](CITATION.cff).
 
