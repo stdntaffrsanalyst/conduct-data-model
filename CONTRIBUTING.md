@@ -2,7 +2,7 @@
 
 Thanks for your interest in this project.
 
-This repository is **publicly available for use**, but it is **not currently accepting pull requests that modify the codebase**. The best way to engage is through **GitHub Discussions**, where we can troubleshoot, compare approaches, and share patterns safely.
+This repository is **publicly available for use**, but it is **not currently accepting pull requests that modify the codebase**. The best way to engage is through **GitHub Discussions**, where I can troubleshoot, compare approaches, and share patterns safely.
 
 ## Where to ask what
 
