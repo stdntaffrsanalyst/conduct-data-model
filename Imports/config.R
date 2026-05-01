@@ -2,20 +2,20 @@
 # Configuration file for student conduct data pipeline
 # Contains all constants, mappings, and settings
 # Author: Joshua L. Moermond
-# Last Updated: 2026-01-13
+# Last Updated: 2026-03-30
 
 # Academic Years ---------------------------------------------------------
 
 ACADEMIC_YEARS <- c(
   "AY1920",
-  "AY2021", 
+  "AY2021",
   "AY2122",
   "AY2223",
   "AY2324",
   "AY2425",
-  "AY2526"
+  "AY2526",
+  "AY2627"
 )
-
 
 # Date Ranges ------------------------------------------------------------
 
@@ -24,61 +24,60 @@ DATE_RANGE <- list(
   end = as.Date("2027-07-31")
 )
 
-
 # File Paths -------------------------------------------------------------
 
 PATHS <- list(
-  export = "Exports/REDConduct_StarSchema.xlsx",
-  pepper = "Imports/pepper.bin",
+  export_local = "~/GitHub/conduct-analytics/analyses/conduct-data-model/exports/REDConduct_StarSchema.xlsx",
+  export_onedrive = "C:/Users/moermojl/OneDrive - University of Cincinnati/data-models/REDConduct_StarSchema.xlsx",
+  pepper = "C:/Users/moermojl/conduct-secrets/pepper.bin",
   imports = list(
-    export1 = "Imports/maxientExport_082019_072021.csv",
-    export2 = "Imports/maxientExport_082021_072024.csv",
-    export3 = "Imports/maxientExport_082024_072027.csv",
-    academic_plans = "Imports/academic_plans.csv",
-    hearing_officers = "Imports/hearing_officers.csv",
-    dim_housing = "Imports/DimHousing.csv",
-    dim_housing_year = "Imports/DimHousingYear.csv",
-    dim_sanction = "Imports/DimSanction.csv",
-    housing_census = "Imports/housing_census.csv",
-    dim_charge = "Imports/DimCharge.csv"
+    import1 = "~/GitHub/conduct-analytics/data-raw/maxientExport_082019_072021.csv",
+    import2 = "~/GitHub/conduct-analytics/data-raw/maxientExport_082021_072024.csv",
+    import3 = "~/GitHub/conduct-analytics/data-raw/maxientExport_082024_072027.csv",
+    academic_plans = "~/GitHub/conduct-analytics/shared/lookup/DimAcademicPlans.csv",
+    hearing_officers = "~/GitHub/conduct-analytics/shared/lookup/hearing_officers.csv",
+    dim_housing = "~/GitHub/conduct-analytics/shared/lookup/DimHousing.csv",
+    dim_housing_year = "~/GitHub/conduct-analytics/shared/lookup/DimHousingYear.csv",
+    dim_sanction = "~/GitHub/conduct-analytics/shared/lookup/DimSanction.csv",
+    housing_census = "~/GitHub/conduct-analytics/shared/lookup/housing_census.csv",
+    dim_charge = "~/GitHub/conduct-analytics/shared/lookup/DimCharge.csv",
+    dim_college = "~/GitHub/conduct-analytics/shared/lookup/DimCollege.csv"
   )
 )
-
 
 # Residential Locations (RED) --------------------------------------------
 
 RED_LOCATIONS <- c(
   "101 East Corry",
-  "Bellevue Gardens", 
+  "Bellevue Gardens",
   "Calhoun Hall",
   "Comfort Inn",
-  "CP Cincy", 
-  "CRC Hall", 
-  "Dabney Hall", 
-  "Daniels Hall", 
+  "CP Cincy",
+  "CRC Hall",
+  "Dabney Hall",
+  "Daniels Hall",
   "Fairfield Inn",
   "Gateway Lofts",
-  "Hampton Inn", 
-  "Jefferson House", 
-  "Marian Spencer Hall", 
-  "Morgens Hall", 
-  "Schneider Hall", 
+  "Hampton Inn",
+  "Jefferson House",
+  "Marian Spencer Hall",
+  "Morgens Hall",
+  "Schneider Hall",
   "Scioto Hall",
   "Senator Place",
   "Siddall Hall",
   "Stetson Square",
   "Stratford Heights",
   "The Deacon",
-  "The Eden", 
+  "The Eden",
   "The Graduate",
   "The Union",
   "Turner Hall",
-  "University Edge", 
-  "University Park Apartments", 
+  "University Edge",
+  "University Park Apartments",
   "USquare",
   "The Verge"
 )
-
 
 # Location Name Mappings -------------------------------------------------
 
@@ -110,7 +109,42 @@ LOCATION_MAP <- c(
   "Usquare" = "USquare",
   "Verge" = "The Verge",
   "The Comfort Inn" = "Comfort Inn",
-  "MainStay Suites" = "Comfort Inn"
+  "MainStay Suites" = "Comfort Inn",
+  "All City Streets (Off Campus)" = "Off-Campus",
+  "Allied Health Sciences" = "Academic Classroom Or Building",
+  "Arts And Sciences" = "Academic Classroom Or Building",
+  "Backstage Dr @ Corbett Dr" = "On-Campus",
+  "Bookstore Tuc" = "Tangeman University Center",
+  "Calhoun St Garage" = "Calhoun Garage",
+  "Clermont College" = "UC Clermont College",
+  "College Conservatory Of Music" = "Academic Classroom Or Building",
+  "Corry Blvd @ Jefferson Ave" = "Off-Campus",
+  "Delta Tau Delta" = "Student Organization",
+  "Design, Architecture, Art, And Planning" = "Academic Classroom Or Building",
+  "Education, Criminal Justice, And Human Services" = "Academic Classroom Or Building",
+  "Edwards Four" = "Edwards Center",
+  "Engineering &Amp; Applied Science" = "Academic Classroom Or Building",
+  "Fifth Third Arena/Shoemaker Center" = "Shoemaker Center",
+  "Kappa Delta" = "Student Organization",
+  "Law" = "Academic Classroom Or Building",
+  "Lindner College Of Business" = "Academic Classroom Or Building",
+  "Medicine" = "Academic Classroom Or Building",
+  "N/A" = "Not Reported",
+  "Not Listed" = "Not Reported",
+  "Nursing" = "Academic Classroom Or Building",
+  "Off Campus" = "Off-Campus",
+  "Other (Specify Below)" = "Other",
+  "Pharmacy" = "Academic Classroom Or Building",
+  "Rotc" = "Student Organization",
+  "Sigma Alpha Epsilon" = "Student Organization",
+  "Theta Phi Alpha" = "Student Organization",
+  "Tuc" = "Tangeman University Center",
+  "U Square" = "USquare",
+  "Uc Blue Ash College" = "UC Blue Ash College",
+  "Uc Clermont" = "UC Clermont College",
+  "Uc Clermont College" = "UC Clermont College",
+  "Uc Main Campus" = "On-Campus",
+  "Uptown West Campus" = "On-Campus"
 )
 
 # Violation Name Standardization -----------------------------------------
@@ -118,295 +152,116 @@ LOCATION_MAP <- c(
 VIOLATION_REPLACEMENTS <- c(
   "Academic Misconduct - Aiding &amp; Abetting" =
     "Academic Misconduct - Aiding and Abetting",
-  "Academic Misconduct - Violating Ethical or Professional Standards" = 
+  "Academic Misconduct - Violating Ethical or Professional Standards" =
     "Academic Misconduct - Violating Standards",
-  "Aiding &amp; Abetting" = 
+  "Aiding &amp; Abetting" =
     "Aiding and Abetting",
-  "Alcohol - Underage possession" = 
+  "Alcohol - Underage possession" =
     "Alcohol",
-  "Alcohol - Public Intoxication" = 
+  "Alcohol - Public Intoxication" =
     "Alcohol",
-  "Dishonesty &amp; Misrepresentation" = 
+  "Dishonesty &amp; Misrepresentation" =
     "Dishonesty and Misrepresentation",
-  "Drugs or Narcotics - Paraphernalia" = 
+  "Drugs or Narcotics - Paraphernalia" =
     "Drugs or Narcotics",
-  "Drugs or Narcotics - Possession/ Use" = 
+  "Drugs or Narcotics - Possession/ Use" =
     "Drugs or Narcotics",
-  "Drugs or Narcotics - Distribution" = 
+  "Drugs or Narcotics - Distribution" =
     "Drugs or Narcotics",
-  "Drugs or Narcotics - Unauthorized prescription" = 
+  "Drugs or Narcotics - Unauthorized prescription" =
     "Drugs or Narcotics",
-  "Physical Abuse or Harm, or Threat of Physical Abuse or Harm" = 
+  "Physical Abuse or Harm, or Threat of Physical Abuse or Harm" =
     "Physical Abuse or Harm (or Threat)",
-  "Residence Hall Rules &amp; Regulations - Appliances and Electric Cords" = 
+  "Residence Hall Rules &amp; Regulations - Appliances and Electric Cords" =
     "GUL - Appliances and Electric Cords",
-  "Residence Hall Rules &amp; Regulations - Commercial &amp; Business Activity" = 
+  "Residence Hall Rules &amp; Regulations - Commercial &amp; Business Activity" =
     "GUL - Commercial and Business Activity",
-  "Residence Hall Rules &amp; Regulations - Dining Centers" = 
+  "Residence Hall Rules &amp; Regulations - Dining Centers" =
     "GUL - Dining Centers",
-  "Residence Hall Rules &amp; Regulations - Elevators, Hallways &amp; Restricted Areas" = 
+  "Residence Hall Rules &amp; Regulations - Elevators, Hallways &amp; Restricted Areas" =
     "GUL - Elevators, Hallways, and Restricted Areas",
-  "Residence Hall Rules &amp; Regulations - Fire Safety" = 
+  "Residence Hall Rules &amp; Regulations - Fire Safety" =
     "GUL - Fire Safety",
-  "Residence Hall Rules &amp; Regulations - Furniture" = 
+  "Residence Hall Rules &amp; Regulations - Furniture" =
     "GUL - Furniture",
-  "Residence Hall Rules &amp; Regulations - Gambling" = 
+  "Residence Hall Rules &amp; Regulations - Gambling" =
     "GUL - Gambling",
-  "Residence Hall Rules &amp; Regulations - Guests" = 
+  "Residence Hall Rules &amp; Regulations - Guests" =
     "GUL - Guests",
-  "Residence Hall Rules &amp; Regulations - Health &amp; Safety" = 
+  "Residence Hall Rules &amp; Regulations - Health &amp; Safety" =
     "GUL - Health and Safety",
-  "Residence Hall Rules &amp; Regulations - Keys &amp; Access" = 
+  "Residence Hall Rules &amp; Regulations - Keys &amp; Access" =
     "GUL - Keys and Access",
   "Residence Hall Rules &amp; Regulations - Mail" =
     "GUL - Mail",
-  "Residence Hall Rules &amp; Regulations - Pets, Service Animals, &amp; Assistance Animals" = 
+  "Residence Hall Rules &amp; Regulations - Pets, Service Animals, &amp; Assistance Animals" =
     "GUL - Pets, Service Animals, and Assistance Animals",
-  "Residence Hall Rules &amp; Regulations - Quiet Hours &amp; Noise" = 
+  "Residence Hall Rules &amp; Regulations - Quiet Hours &amp; Noise" =
     "GUL - Noise",
-  "Residence Hall Rules &amp; Regulations - Recording Devices" = 
+  "Residence Hall Rules &amp; Regulations - Recording Devices" =
     "GUL - Recording Devices",
-  "Residence Hall Rules &amp; Regulations - Restrooms" = 
+  "Residence Hall Rules &amp; Regulations - Restrooms" =
     "GUL - Restrooms",
-  "Residence Hall Rules &amp; Regulations - Sign Posting" = 
+  "Residence Hall Rules &amp; Regulations - Sign Posting" =
     "GUL - Sign Posting",
-  "Residence Hall Rules &amp; Regulations - Tobacco-Free Policy" = 
+  "Residence Hall Rules &amp; Regulations - Tobacco-Free Policy" =
     "GUL - Tobacco-Free Policy",
-  "Residence Hall Rules &amp; Regulations - Weapons &amp; Fireworks" = 
+  "Residence Hall Rules &amp; Regulations - Weapons &amp; Fireworks" =
     "GUL - Weapons and Fireworks",
-  "Residence Hall Rules &amp; Regulations - Water Fights &amp; Games" = 
+  "Residence Hall Rules &amp; Regulations - Water Fights &amp; Games" =
     "GUL - Water Fights and Games",
   "Residence Hall Rules &amp; Regulations - Windows" = "GUL - Windows and Exits",
-  "Residence Hall Rules &amp; Regulations - Windows &amp; Exits" = 
+  "Residence Hall Rules &amp; Regulations - Windows &amp; Exits" =
     "GUL - Windows and Exits",
-  "Unauthorized use of university key" = 
+  "Unauthorized use of university key" =
     "Unauthorized Use of University Key",
-  "University policies or rules" = 
+  "University policies or rules" =
     "University Policies or Rules",
-  "University policies or rules â€“ COVID-19 Safety Measures and Protocols" = 
+  "University policies or rules â€“ COVID-19 Safety Measures and Protocols" =
     "COVID-19 Safety",
-  "University policies or rules – COVID-19 Safety Measures and Protocols" = 
+  "University policies or rules – COVID-19 Safety Measures and Protocols" =
     "COVID-19 Safety",
-  "University policies or rules \x96 COVID-19 Safety Measures and Protocols" = 
+  "University policies or rules \x96 COVID-19 Safety Measures and Protocols" =
     "COVID-19 Safety",
-  "Harassment or Discrimination/Dating Violence" = 
+  "Harassment or Discrimination/Dating Violence" =
     "Harassment or Discrimination",
-  "Harassment or Discrimination/Sexual/gender-based Harassment" = 
+  "Harassment or Discrimination/Sexual/gender-based Harassment" =
     "Harassment or Discrimination",
-  "Harassment or Discrimination/Sexual-gender based violence" = 
+  "Harassment or Discrimination/Sexual-gender based violence" =
     "Harassment or Discrimination",
-  "Harassment or Discrimination/Stalking" = 
+  "Harassment or Discrimination/Stalking" =
     "Harassment or Discrimination",
-  "Violation of federal, state, or local law" = 
+  "Violation of federal, state, or local law" =
     "Violation of Federal, State, or Local Law",
-  "Tobacco and Smoke Free Environment Policy" = 
+  "Tobacco and Smoke Free Environment Policy" =
     "Tobacco and Smoking"
 )
 
-# Sanction Name Standardization ------------------------------------------
+# Issue Name Standardization (BIT/CARE Pipeline) -------------------------
+# Used by the behavioral intervention pipeline, not the conduct data model.
+# Retained here because config.R is shared across both pipelines.
+# "Issues" in Maxient are functionally the same field as charges but reflect
+# case management language rather than conduct charging language. Some care
+# cases also contain conduct charges entered in error; this map corrects them.
 
-SANCTION_REPLACEMENTS <- c(
-  "ABSENCE" = 
-    "Absence",
-  "ACDISMISS" = 
-    "Academic Dismissal",
-  "ACSUSP" = 
-    "Academic Suspension",
-  "ADDENDUM" = 
-    "Addendum",
-  "ADMS" = 
-    "Alcohol Decision Making Seminar",
-  "ADP" = 
-    "Academic Probation",
-  "ADR" = 
-    "Academic Reprimand",
-  "ALDRPAPER" = 
-    "Alcohol and Drug Reflection Paper",
-  "ANGERMGMT" = 
-    "Anger Management Course",
-  "APOLOGY" = 
-    "Apology Letter",
-  "ASEP" = 
-    "Alcohol Skills Education Program",
-  "ASSESSMENT" = 
-    "Assessment with CAPS",
-  "AUTOBIO_PAPER" = 
-    "Substance Autobiography Paper",
-  "BASICS" = 
-    "Brief Alcohol Screening and Intervention for College Students",
-  "BEHAVAGREE" = 
-    "Behavioral Agreement",
-  "BEHAVIORMOD" = 
-    "Behavior Modification Course",
-  "BULLETIN" = 
-    "Bulletin Board",
-  "BULLYING" = 
-    "Bullying Course",
-  "BYSTANDER" = 
-    "Bystander Intervention Seminar",
-  "CANNABISCRS" = 
-    "The Cannabis Course",
-  "CHNGDIR" = 
-    "Director Change of Information",
-  "CHNGPERCENT" = 
-    "Reduced Grade for Course",
-  "CLASSACCM" = 
-    "Classroom Accommodations",
-  "COMMUNITY_SERVICE" = 
-    "Community Service",
-  "CONSENT_WKSP" = 
-    "Consent Workshop",
-  "CONTACT_PAPER" = 
-    "Contract Tracing Exercise and Reflection",
-  "CPSRAPIDCONSULT" = 
-    "CAPS Rapid Access Consultation",
-  "DMS" = 
-    "Decision Making Seminar",
-  "DRUGALCAWARE" = 
-    "Drug & Alcohol Awareness Course",
-  "DSEP" = 
-    "Drug Skills Education Program",
-  "EDPROGP" = 
-    "Plagiarism Module",
-  "EDU_SIGN" = 
-    "Educational Sign or Flier",
-  "EMPIM" = 
-    "Employment Interim Measure",
-  "EXPULSION" = 
-    "Dismissal",
-  "FAIL" = 
-    "Reduced Grade on Exam/Assignment",
-  "FIRESAFEED" = 
-    "Fire Safety Education",
-  "GRADECHNG" = 
-    "Failure in the Course",
-  "HEALTHY_REL_WKSP" = 
-    "Healthy Relationships Workshop",
-  "HEALTH_PAPER" = 
-    "Health Policy Video and Reaction Paper",
-  "HMW" = 
-    "Healthy Masculinity Workshop",
-  "INTERIMSUSP" = 
-    "Interim Suspension",
-  "LACROOM" = 
-    "Lactation Room Access",
-  "LIFESKILLS" = 
-    "Life Skills Course",
-  "LOSSPRIV" = 
-    "Loss of Privileges",
-  "MISSASGN" = 
-    "Missed Assignment",
-  "MOVETOHSNG" = 
-    "Move into Housing with Financial Assistance",
-  "MOVETOHSNG_NOASST" = 
-    "Move into Housing without Financial Assistance",
-  "NCO_OEO" = 
-    "Mutual No-Contact Order (OEO)",
-  "NGHTRIDE" = 
-    "NightRide Priority Ride",
-  "NOCONTACT" = 
-    "No-Contact Directive",
-  "ORG_RESTORE" = 
-    "Student Organization Restorative Action Plan",
-  "PACE" = 
-    "PACE Workshop",
-  "PARENTNOTIFY" = 
-    "Parent/Guardian Notification",
-  "PARKING" = 
-    "Parking with Financial Assistance",
-  "PARKING_NOASST" = 
-    "Parking without Financial Assistance",
-  "PFL" = 
-    "Substance Abuse Education for Alcohol",
-  "PFLDRUG" = 
-    "Drug Sanction Course",
-  "REDEXPUL" = 
-    "Housing Termination and Permanent Loss of Privileges",
-  "REDSUSP" = 
-    "Housing Termination and Temporary Loss of Privileges",
-  "REDTRANSFER" = 
-    "Housing Assignment Relocation",
-  "REFERRAL" = 
-    "Referral",
-  "REFLECTCONT" = 
-    "Reflection Paper",
-  "REFLECTOPEN" = 
-    "Reflection Paper - Open-Ended",
-  "REFLECTPAP" = 
-    "Reflection Paper - Preparation",
-  "REFLECTPRE" = 
-    "Reflection Paper - Pre-Contemplation",
-  "REFLGTUL" = 
-    "GUL Reflection",
-  "REFMEET" = 
-    "Reflection Meeting",
-  "REFUNDAPP" = 
-    "Tuition Refund Application",
-  "REGREIMBRSE" = 
-    "Registrar Grade Removal with Reimbursement",
-  "RELOCATION" = 
-    "Housing Relocation",
-  "REPRIMAND" = 
-    "Reprimand",
-  "RESTITUTION" = 
-    "Restitution",
-  "RESTRICTION" = 
-    "Ban From Location",
-  "RESUBASSIGN" = 
-    "Retest/Re-Submission of the Assignment/Exam",
-  "RP_PASSIVE" = 
-    "Reflection Paper - Passive Participation",
-  "SCHLLTR" = 
-    "Scholarship Letter",
-  "SECURITYASST" = 
-    "Security Assistance",
-  "SOBEREXP" = 
-    "Sober Experience Calendar",
-  "TAIALCOHOL" = 
-    "Think About It: Alcohol",
-  "TAIDRUGS" = 
-    "Think About It: Drugs",
-  "TEDTALK" = 
-    "TED Talk Reflection",
-  "TERMINATION" = 
-    "Housing Removal",
-  "THEFTAWARE" = 
-    "Theft Awareness Course",
-  "TOBACCO" = 
-    "Tobacco Awareness Course",
-  "VAPING" = 
-    "Vaping Awareness Course",
-  "DEFSUSHP" = 
-    "Deferred Suspension of Housing Privileges",
-  "DP" = 
-    "Disciplinary Probation",
-  "SUSPENSION" = 
-    "Suspension",
-  "ADDITIONAL" = 
-    "Additional Sanctions or Stipulations"
+ISSUE_REPLACEMENTS <- c(
+  "Alcohol" = "Substance Use Concern (Alcohol)",
+  "Alcohol - Underage possession" = "Substance Use Concern (Alcohol)",
+  "General Concern - Referred to Title 9" = "Harassment or Discrimination",
+  "General Concern DoS Attention" = "General Concern",
+  "General Concern-Family/Friends" = "General Concern",
+  "Harassment or Discrimination/Stalking" = "Harassment or Discrimination",
+  "Hazing (Reporter or Victim)" = "Hazing",
+  "Injury, Illness, or Medical" = "Injury or Illness",
+  "Mood Swings" = "Concerning Mood Regulation",
+  "Potential Harassment or Discrimination" = "Harassment or Discrimination",
+  "Strange classroom behavior" = "Unusual Behavior",
+  "Physical Abuse or Harm, or Threat of Physical Abuse or Harm" = "Harm (to Others or Self)",
+  "Gender-Based Harassment or Violence" = "Harassment or Discrimination",
+  "Random or Sudden Outbursts of Emotion" = "Concerning Mood Regulation",
+  "Sudden Change in Classroom Performance" = "Academic Challenges",
+  "Financial Hardship" = "Financial Insecurity"
 )
-
-
-# College Abbreviations --------------------------------------------------
-
-COLLEGE_REPLACEMENTS <- c(
-  'Colege of Dsn, Arch, Art & Pln' = 'DAAP',
-  'Lindner College of Business' = 'LCOB',
-  'Col of Arts & Science' = 'CAS',
-  'College of Ed, CJ, & HS' = 'CECH',
-  'Blue Ash College' = 'UCBA',
-  'College of Nursing' = 'CON',
-  'College of Eng & Appl Sci' = 'CEAS',
-  'University of Cincinnati' = 'UC',
-  'Clermont College' = 'UCCC',
-  'College of Allied Health Sci' = 'CAHS',
-  'College of Medicine' = 'COM',
-  'College Conservatory of Music' = 'CCM',
-  'UC International Pathways' = 'UCIP',
-  'Adult Learning Center' = 'ALC',
-  'James L. Winkle Coll of Pharm' = 'COP'
-)
-
 
 # Academic Calendar Pause Periods ----------------------------------------
 # Breaks, holidays, and other periods to exclude from timeline calculations
@@ -423,7 +278,7 @@ OMIT_RANGES <- list(
   c("2018-04-27", "2018-05-06"), # spring to summer transition
   c("2018-05-28", "2018-05-28"), # memorial day
   c("2018-07-04", "2018-07-04"), # independence day
-  
+
   # AY1819
   c("2018-08-06", "2018-08-26"), # summer to fall transition
   c("2018-09-04", "2018-09-04"), # labor day
@@ -436,7 +291,7 @@ OMIT_RANGES <- list(
   c("2019-04-27", "2019-05-12"), # spring to summer transition
   c("2019-05-27", "2019-05-27"), # memorial day
   c("2019-07-04", "2019-07-04"), # independence day
-  
+
   # AY1920
   c("2019-08-11", "2019-08-25"), # summer to fall transition
   c("2019-09-02", "2019-09-02"), # labor day
@@ -449,7 +304,7 @@ OMIT_RANGES <- list(
   c("2020-04-26", "2020-05-10"), # spring to summer transition
   c("2020-05-25", "2020-05-25"), # memorial day
   c("2020-07-03", "2020-07-03"), # independence day
-  
+
   # AY2021
   c("2020-08-09", "2020-08-23"), # summer to fall transition
   c("2020-09-07", "2020-09-07"), # labor day
@@ -460,7 +315,7 @@ OMIT_RANGES <- list(
   c("2021-04-24", "2021-05-09"), # spring to summer transition
   c("2021-05-31", "2021-05-31"), # memorial day
   c("2021-07-05", "2021-07-05"), # independence day
-  
+
   # AY2122
   c("2021-08-10", "2021-08-22"), # summer to fall transition
   c("2021-09-06", "2021-09-06"), # labor day
@@ -474,7 +329,7 @@ OMIT_RANGES <- list(
   c("2022-05-30", "2022-05-30"), # memorial day
   c("2022-06-20", "2022-06-20"), # juneteenth
   c("2022-07-04", "2022-07-04"), # independence day
-  
+
   # AY2223
   c("2022-08-07", "2022-08-21"), # summer to fall transition
   c("2022-09-05", "2022-09-05"), # labor day
@@ -489,7 +344,7 @@ OMIT_RANGES <- list(
   c("2023-05-29", "2023-05-29"), # memorial day
   c("2023-06-19", "2023-06-19"), # juneteenth
   c("2023-07-04", "2023-07-04"), # independence day
-  
+
   # AY2324
   c("2023-08-06", "2023-08-20"), # summer to fall transition
   c("2023-09-04", "2023-09-04"), # labor day
@@ -504,7 +359,7 @@ OMIT_RANGES <- list(
   c("2024-05-27", "2024-05-27"), # memorial day
   c("2024-06-19", "2024-06-19"), # juneteenth
   c("2024-07-04", "2024-07-04"), # independence day
-  
+
   # AY2425
   c("2024-08-04", "2024-08-25"), # summer to fall transition
   c("2024-09-02", "2024-09-02"), # labor day
@@ -520,7 +375,7 @@ OMIT_RANGES <- list(
   c("2025-05-26", "2025-05-26"), # memorial day
   c("2025-06-19", "2025-06-19"), # juneteenth
   c("2025-07-04", "2025-07-04"), # independence day
-  
+
   # AY2526
   c("2025-08-10", "2025-08-24"), # summer to fall transition
   c("2025-09-01", "2025-09-01"), # labor day
